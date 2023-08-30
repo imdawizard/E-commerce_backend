@@ -23,7 +23,7 @@ const seedAll = async () => {
 
     process.exit(0);
   } catch (error) {
-    console.error( 'Spanky Error seeding the database', error);
+    console.error( 'Error seeding the database', error);
     process.exit(1);
   }
 };

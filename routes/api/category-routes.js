@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
     });
     res.json(categories);
   } catch (error) {
-    res.json(500).json({ error: 'Error getting categories'});
+    console.log(error);
+    res.status(500).json({ error: 'Error getting categories'});
   }
 });
 
@@ -35,10 +36,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new category
   try {
-    const { name } = req.body;
-    const newCategory = await Category.create({ name });
+    const { category_name } = req.body;
+    const newCategory = await Category.create({ category_name });
     res.json(newCategory);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Error creating category' });
   }
 });
@@ -51,8 +53,8 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Category not found' });
     }
 
-    const { name } = req.body;
-    await category.update({ name });
+    const { category_name } = req.body;
+    await category.update({ category_name });
     res.json(category);
   } catch (error) {
     res.status(500).json({ error: 'Error updating category' });
